@@ -1,7 +1,19 @@
-import React from "react"
+import React, {useState} from "react"
+import Modal from "react-modal";
 
 function Hero() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+
   return (
+    <div>
     <div className="bg-white w-full">
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div
@@ -17,7 +29,9 @@ function Hero() {
           ></div>
         </div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+          {/* <div className="hidden sm:mb-8 sm:flex sm:justify-center"> */}
+          <div className="mb-8 flex justify-center">
+          {/* <div> */}
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
               For business owners!
             </div>
@@ -33,12 +47,15 @@ function Hero() {
               only pay for meetings that happen.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
+              {/* <a
                 href="#"
                 className="no-underline rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Schedule A Call
-              </a>
+              </a> */}
+              <button onClick={openModal} className="no-underline rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                Schedule A Call
+              </button>
               {/* <a
                 href="#"
                 className="text-sm font-semibold leading-6 text-gray-900"
@@ -61,6 +78,26 @@ function Hero() {
           ></div>
         </div>
       </div>
+    </div>
+
+    <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Schedule Meeting"
+        className="modal-content"
+        overlayClassName="modal-overlay"
+      >
+        <div className="flex justify-end">
+          <button onClick={closeModal} className="text-2xl font-bold">
+            &times;
+          </button>
+        </div>
+        <iframe
+          src="https://calendly.com/mail2sourov/get-more-meeting-with-porspective-clients"
+          style={{ width: "100%", height: "500px", border: "none" }}
+          title="Calendly Scheduling"
+        ></iframe>
+      </Modal>
     </div>
   )
 }

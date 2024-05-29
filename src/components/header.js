@@ -1,8 +1,21 @@
-import React from "react"
+import React,{useState} from "react"
+import Modal from 'react-modal'
 
 const Header = () => {
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
+
   return (
     // <section className="py-16">
+    <>
     <header className="bg-white shadow-md w-full fixed top-0 left-0 z-50">
       <div className="max-w-screen-xl mx-auto px-4 py-4 flex justify-between items-center">
         <div className="text-2xl font-bold text-indigo-600">
@@ -10,11 +23,30 @@ const Header = () => {
             LEAD SCORPIO
           </a>
         </div>
-        <button className="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">
+        <button onClick={openModal} className="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-red-700 transition duration-300">
           Schedule Meeting
         </button>
       </div>
     </header>
+    <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Schedule Meeting"
+        className="modal-content"
+        overlayClassName="modal-overlay"
+      >
+        <div className="flex justify-end">
+          <button onClick={closeModal} className="text-2xl font-bold">
+            &times;
+          </button>
+        </div>
+        <iframe
+          src="https://calendly.com/mail2sourov/get-more-meeting-with-porspective-clients"
+          style={{ width: "100%", height: "500px", border: "none" }}
+          title="Calendly Scheduling"
+        ></iframe>
+      </Modal>
+    </>
     // </section>
   )
 }
